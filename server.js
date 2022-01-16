@@ -1,8 +1,11 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const authRoute = require('./routes/auth')
 const app = express();
+
 dotenv.config()
+app.use(express.json())
 
 mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
@@ -18,6 +21,7 @@ db.on('error', (err) => {
     console.log(err);
 });
 
+app.use('/api/auth', authRoute)
 
 app.listen(process.env.PORT, () => {
     console.log(`backend started on ${process.env.PORT}`);
