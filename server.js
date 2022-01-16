@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoute = require('./routes/auth')
+const userRoute = require('./routes/user')
 const app = express();
 
 dotenv.config()
@@ -22,6 +23,7 @@ db.on('error', (err) => {
 });
 
 app.use('/api/auth', authRoute)
+app.use('/api/user', userRoute)
 
 app.listen(process.env.PORT, () => {
     console.log(`backend started on ${process.env.PORT}`);
