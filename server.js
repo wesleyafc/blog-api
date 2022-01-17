@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoute = require('./routes/auth')
 const userRoute = require('./routes/user')
+const postRoute = require('./routes/post')
 const app = express();
 
 dotenv.config()
@@ -24,6 +25,7 @@ db.on('error', (err) => {
 
 app.use('/api/auth', authRoute)
 app.use('/api/user', userRoute)
+app.use('/api/post', postRoute)
 
 app.listen(process.env.PORT, () => {
     console.log(`backend started on ${process.env.PORT}`);
