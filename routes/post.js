@@ -38,7 +38,7 @@ router.put("/:id", async (request, response) => {
             }
         }
     } catch (error) {
-        response.stus(500).json(error)
+        response.status(500).json(error)
     }
 })
 

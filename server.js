@@ -1,3 +1,4 @@
+const cors = require('cors')
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
@@ -9,6 +10,7 @@ const categoryRoute = require('./routes/categories')
 const app = express();
 
 dotenv.config()
+app.use(cors())
 app.use(express.json())
 
 mongoose.connect(process.env.DATABASE_URL, {
@@ -42,7 +44,7 @@ app.post('/api/upload', upload.single("file"), (request, response) => {
 
 app.use('/api/auth', authRoute)
 app.use('/api/user', userRoute)
-app.use('/api/post', postRoute)
+app.use('/api/posts', postRoute)
 app.use('/api/categories', categoryRoute)
 
 app.listen(process.env.PORT, () => {
