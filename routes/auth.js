@@ -14,9 +14,18 @@ router.post("/register", async (request, response) => {
             email: request.body.email,
             password: hashedPassword
         })
+        //check user or email is registered
+        const userANDemailCHECK = await User.find({
+            username: request.body.username,
+            email: request.body.email
+        })
+        if (!userANDemailCHECK) {
+            return
+        } else {
+            const user = await newUser.save()
+            response.status(200).json(user)
+        }
 
-        const user = await newUser.save()
-        response.status(200).json(user)
     } catch (error) {
         console.error(error)
         response.status(500).json(error)
